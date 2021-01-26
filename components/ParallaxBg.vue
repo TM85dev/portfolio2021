@@ -10,7 +10,7 @@ export default {
     mounted() {
         const el = this.$refs.parallax;
         document.body.addEventListener('mousemove', (e) => {
-            el.style.backgroundPosition = `${e.pageX / 15}px ${e.pageY / 15}px`;
+            el.style.backgroundPosition = `${e.screenX / 15}px ${e.screenY / 15}px`;
         })
     }
 }

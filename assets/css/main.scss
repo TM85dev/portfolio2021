@@ -506,9 +506,9 @@ nav {
 // PROJECTS
 .projects-site {
     width: 100%;
-    // height: 100%;
+    padding-bottom: 30px;
     background-color: #1a1a1a;
-    position: relative;
+    // position: relative;
     .shadow {
         width: 100%;
         box-shadow: 0px 1px 8px 12px #1a1a1a;
@@ -577,8 +577,243 @@ nav {
     }
 }
 // ABOUT ME
+.aboutme-site {
+    background-color: #28292C;
+    position: relative;
+    .shadow {
+        width: 100%;
+        box-shadow: 0px 1px 8px 12px #1a1a1a;
+    }
+    .header {
+        position: relative;
+        padding: 40px 16px 16px;
+        h2 {
+            margin: 0;
+            font-family: GothicB;
+            color: white;
+            font-size: 3em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease-in-out;
+            &.active {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+    }
+    .info-learning {
+        padding-bottom: 16px;
+        div {
+            &:first-of-type {
+                color: white;
+                position: absolute;
+                line-height: 1.4em;
+                font-size: 0.9em;
+                padding: 0 10px;
+                background-color: rgb(40 42 44 / 0.5);
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: inset 0 0 10px 6px #28292C;
+                overflow: hidden;
+                p {
+                    opacity: 0;
+                    transition: all 0.4s ease-in-out;
+                    &:first-of-type,
+                    &:last-of-type {
+                        transform: translateX(-100%);
+                    }
+                    &:nth-of-type(2) {
+                        margin: 1.4em 0 3em;
+                        transform: translateX(100%);
+                    }
+                    &.active {
+                        transform: translateX(0%);
+                        opacity: 1;
+                    }
+                }
+            }
+            &:last-of-type {
+                background-image: url(../img/laptop.jpg);
+                background-size: cover;
+                width: 100%;
+                height: 300px;
+                background-repeat: no-repeat;
+                // position: absolute;
+            }
+        }
+    }
+}
+// EXPERIENCE
+.experience {
+    background-image: linear-gradient(to left, #1A1A1A, #535353);
+    padding-bottom: 16px;
+    .shadow {
+        // position: relative;
+        // width: 100%;
+        // height: 0px;
+        // box-shadow: none;
+        background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent);
+        box-shadow: 0 0 16px 16px #28292c;
+        position: relative;
+        // transform: rotate(-2deg);
+        // &:before {
+        //     content: "";
+        //     width: 100%;
+        //     height: 26px;
+        //     position: absolute;
+        //     filter: blur(6px);
+        //     background-image: repeating-linear-gradient(to right, #2f2f2f, #1a1a1a);
+        //     margin-top: -10px;
+        // }
+    }
+    .header {
+        position: relative;
+        padding: 40px 16px 16px;
+        h2 {
+            margin: 0;
+            font-family: GothicB;
+            color: white;
+            font-size: 3em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease-in-out;
+            &.active {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+    }
+    .list-one-title,
+    .list-two-title {
+        position: relative;
+        h3 {
+            margin: 0 16px;
+            position: relative;
+            color: White;
+            font-size: 1em;
+            line-height: 2em;
+            z-index: 1;
+            text-decoration: 1px #ea474d underline;
+            text-underline-offset: 6px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.4s ease-out;
+            &.active {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    }
+    ul {
+        position: relative;
+        counter-reset: num;
+        color: white;
+        margin: 16px 0;
+        padding: 0;
+        font-size: 0.9em;
+        line-height: 1.4em;
+        li {
+            counter-increment: num;
+            display: block;
+            position: relative;
+            padding: 10px 16px 10px 52px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: opacity, transform, 0.4s ease-out;
+            &:before {
+                content: counter(num)'.';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translate(-100%, 100%);
+                padding: 10px 16px;
+                clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+                background-image: linear-gradient(-10deg,#111,#3d3d3d);
+                box-shadow: -2px 0 6px 0 rgba(65,65,65,.9), -2px -2px 6px 0 rgba(65,65,65,.9);
+                transition: opacity, transform, 0.4s ease-in-out;
+            }
+            &.active {
+                opacity: 1;
+                transform: translateY(0%);
+                &:before {
+                    transform: translate(0%, -50%);
+                }
+                &:hover {
+                    text-shadow: 0 0 4px #ea474d;
+                    padding: 10px 10px 10px 58px;
+                    transition: text-shadow, padding, 0.2s ease-out;
+                    &:before {
+                        color: #ea474d;
+                        padding: 10px 19px;
+                        transition: padding, color, 0.2s ease-out;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Hobby
+.hobby {
+    background-color: #28292C;
+    position: relative;
+    .shadow {
+        background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent);
+        box-shadow: 0 0 16px 16px #28292c;
+        position: relative;
+    }
+    .info {
+        div {
+            &:first-of-type {
+                color: white;
+                position: absolute;
+                line-height: 1.4em;
+                font-size: 0.9em;
+                padding: 0 16px;
+                background-color: rgb(42 44 47 / 0.3);
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                // box-shadow: inset 0 0 10px 6px #28292C;
+                overflow: hidden;
+                p {
+                    opacity: 0;
+                    padding-bottom: 20px;
+                    max-width: 60%;
+                    line-height: 1.6em;
+                    transition: all 0.4s ease-in-out;
+                    transform: scale(0);
+                    &.active {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+            }
+            &:last-of-type {
+                background-image: url(/_nuxt/assets/img/japan.jpg);
+                background-size: cover;
+                width: 100%;
+                height: 300px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+    }
+}
 
 // CONTACT
+.contact-site {
+    background-image: url(../img/bg.jpg);
+    // position: relative;
+    min-height: 100%;
+    .shadow {
+        background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent);
+        box-shadow: 0 0 16px 16px #1e2126;
+        position: relative;
+    }
+}
 
 // FOOTER
 
