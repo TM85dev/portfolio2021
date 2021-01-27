@@ -2,7 +2,7 @@
     <nav>
         <div class="logo"></div>
         <div class="icons">
-            <div class="mail"></div>
+            <div class="mail" @click="contactHandler"></div>
             <div class="linkedin"></div>
             <div class="github"></div>
         </div>
@@ -35,6 +35,12 @@ export default {
         this.$refs.otherLang.classList.add('uk');
     },
     methods: {
+        contactHandler() {
+            const el = e => document.querySelector(e);
+            const contact = el('.contact-site').getBoundingClientRect(); 
+            el('.contact-site').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => el('.contact-site form label:first-of-type input').focus(), contact.top > 500 ? 1000 : 400);
+        },
         activeMobileMenu() {
             this.isMobileActive = true;
         },

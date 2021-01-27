@@ -1,6 +1,7 @@
 <template>
-    <div class="project" :style="`background-image: url(${require(`../assets/img/projects/${project.path}.jpg`)})`">
-        <div class="image">
+    <div class="project">
+        <div class="image" :style="`background-image: url(${require(`../assets/img/projects/${project.path}.jpg`)})`"></div>
+        <div class="info">
             <h3>{{ project.name }}</h3>
             <div>
                 <a href="" class="github">GitHub</a>

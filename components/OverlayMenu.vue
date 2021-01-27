@@ -43,7 +43,7 @@ export default {
     },
     mounted() {
         const elDOM = el => document.querySelector(el);
-        const sites = [elDOM('.home-site'), elDOM('.skills-site'), elDOM('.projects-site')];
+        const sites = [elDOM('.home-site'), elDOM('.skills-site'), elDOM('.projects-site'), elDOM('.about-site'), elDOM('.contact-site')];
         sites.forEach((ref, index) => {
             const rect = ref.getBoundingClientRect();
             const link = document.querySelector(`.overlay-menu-list li:nth-of-type(${index + 1})`);
@@ -108,6 +108,12 @@ export default {
         scrollHandler(name) {
             const el = name.replace(' ', '').toLowerCase();
             document.querySelector(`.${el}-site`).scrollIntoView({behavior: 'smooth'});
+            this.closeMobileMenu();
+            if(name.toLowerCase()==='contact') {
+                const elDOM = e => document.querySelector(e);
+                const contact = elDOM('.contact-site').getBoundingClientRect(); 
+                setTimeout(() => elDOM('.contact-site form label:first-of-type input').focus(), contact.top > 500 ? 1000 : 400);
+            }
         }
     }
 }
