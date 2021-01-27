@@ -24,39 +24,35 @@ export default {
         const elList = e => document.querySelectorAll(e);
 
         window.addEventListener('scroll', () => {
-            this.isTopButtonActive = (this.$refs.home.$el.getBoundingClientRect().bottom <= window.innerHeight / 2 && this.$refs.footer.$el.getBoundingClientRect().bottom > (window.innerHeight + 50)) ? true : false;
-            if(this.scrollCondition(el('.skills-site .header h2'))) el('.skills-site .header h2').classList.add('active');
-            if(this.scrollCondition(el('.skills-site .skills-menu'))) this.showScaleOpacityAnim(el('.skills-site .skills-menu'));
-            if(this.scrollCondition(el('.skills-site .skills-icons'))) this.showScaleOpacityAnim(el('.skills-site .skills-icons'));
+            this.isTopButtonActive = this.toggleTopButton();
+            const addClassEl = [el('.skills-site .header h2'), el('.projects-site .header h2'), el('.aboutme-site .header h2'), el('.experience .header h2'), el('.experience .list-one-title h3'), el('.experience .list-two-title h3'), el('.hobby .info div p'), el('.contact-site .header h2'), el('.contact-site .info p'), el('.contact-site form button')];
+            addClassEl.forEach(item => {
+                if(this.scrollCondition(item)) item.classList.add('active')
+            });
+            const addClassElLists = [elList('.aboutme-site .info-learning div p'), elList('.experience .list-one li'), elList('.experience .list-two li'), elList('.contact-site form label')];
+            addClassElLists.forEach(item => {
+                item.forEach(el => {
+                    if(this.scrollCondition(el)) el.classList.add('active');
+              })
+            })
+            const skillsLists = [el('.skills-site .skills-menu'), el('.skills-site .skills-icons')];
+            skillsLists.forEach(item => {
+                if(this.scrollCondition(item)) this.showScaleOpacityAnim(item);
+            })
             if(el('.skills-site .skill-info').getBoundingClientRect().top + (el('.skills-site .skill-info').getBoundingClientRect().height / 2) <= window.innerHeight) el('.skills-site .skill-info').classList.add('active');
-            if(this.scrollCondition(el('.projects-site .header h2'))) el('.projects-site .header h2').classList.add('active');
             elList('.projects-site .project').forEach(project => {
                 if(project.getBoundingClientRect().top + (project.getBoundingClientRect().height / 2) <= window.innerHeight) project.classList.add('active');
             });
-            if(this.scrollCondition(el('.aboutme-site .header h2'))) el('.aboutme-site .header h2').classList.add('active');
-            elList('.aboutme-site .info-learning div p').forEach(el => {
-                if(this.scrollCondition(el)) el.classList.add('active');
-            })
-            if(this.scrollCondition(el('.experience .header h2'))) el('.experience .header h2').classList.add('active');
-            elList('.experience .list-one li').forEach(el => {
-                if(this.scrollCondition(el)) el.classList.add('active');
-            })
-            if(this.scrollCondition(el('.experience .list-one-title h3'))) el('.experience .list-one-title h3').classList.add('active');
-            elList('.experience .list-two li').forEach(el => {
-                if(this.scrollCondition(el)) el.classList.add('active');
-            })
-            if(this.scrollCondition(el('.experience .list-two-title h3'))) el('.experience .list-two-title h3').classList.add('active');
-            if(this.scrollCondition(el('.hobby .info div p'))) el('.hobby .info div p').classList.add('active');
-            if(this.scrollCondition(el('.contact-site .header h2'))) el('.contact-site .header h2').classList.add('active');
-            if(this.scrollCondition(el('.contact-site .info p'))) el('.contact-site .info p').classList.add('active');
-            elList('.contact-site form label').forEach(el => {
-                if(this.scrollCondition(el)) el.classList.add('active');
-            })
-            if(this.scrollCondition(el('.contact-site form button'))) el('.contact-site form button').classList.add('active');
             this.setActiveLink();
         });
     },
   methods: {
+      toggleTopButton() {
+          const homeBottom = this.$refs.home.$el.getBoundingClientRect().bottom;
+          const footerBottom = this.$refs.footer.$el.getBoundingClientRect().bottom;
+          return (homeBottom <= (window.innerHeight / 2)) && (footerBottom > (window.innerHeight + 50)) ? 
+              true : false
+      },
       showScaleOpacityAnim(element) {
           element.children.forEach((item, index) => {
               this.$anime({
