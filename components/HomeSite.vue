@@ -1,10 +1,9 @@
 <template>
     <div ref="site" class="home-site" @mousemove="mouseMoveHandler">
-        <!-- <ParallaxBg ref="parallax" /> -->
         <div ref="logo" id="logo">
             <div class="logo"></div>
             <div class="greetings">
-                <h1>WELCOME</h1>
+                <h1>{{ lang==='uk' ? header.uk : header.pl }}</h1>
                 <p ref="letters"><span 
                     v-for="(letter, index) in greetings" :key="index"
                     v-anime="{
@@ -19,7 +18,7 @@
             </div>
         </div>
         <div class="scroll-down" @click="scrollDown">
-            <p>SCROLL DOWN</p>
+            <p>{{ lang==='uk' ? scrollInfo.uk : scrollInfo.pl }}</p>
             <div></div>
         </div>
     </div>
@@ -27,9 +26,17 @@
 
 <script>
 export default {
+    props: [
+        'lang'
+    ],
+    data: () => ({
+        header: {uk: 'WELCOME', pl: 'WITAJ'},
+        underHeader:  {uk: 'TO MY WEBSITE', pl: 'NA MOJEJ STRONIE'},
+        scrollInfo: {uk: 'SCROLL DOWN', pl: 'PRZEWIŃ W DÓŁ'}
+    }),
     computed: {
         greetings() {
-            return 'TO MY WEBSITE'.split('');
+            return this.lang==='uk' ? this.underHeader.uk.split('') : this.underHeader.pl.split('');
         }
     },
     methods: {

@@ -3,7 +3,7 @@
         <div class="shadow"></div>
         <div class="info">
             <div>
-                <p>In my free time I like to rest doing sports (running, bike, squash, gym), traveling, learning something new about programming and Japanese.</p>
+                <p>{{ info }}</p>
             </div>
             <div></div>
         </div>
@@ -12,6 +12,6 @@
 
 <script>
 export default {
-    
+    props: ['info']
 }
 </script>

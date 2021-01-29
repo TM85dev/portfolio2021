@@ -18,8 +18,8 @@
             <ul ref="list" class="overlay-menu-list">
                 <li v-for="(link, index) in list" :key="index">
                     <a :href="`/${link.name}`" 
-                        @click.prevent="scrollHandler(link.name)">
-                            {{ link.name }}
+                        @click.prevent="scrollHandler(link.name.uk)">
+                            {{ link.name[lang] }}
                     </a>
                     <div></div>
                 </li>
@@ -30,17 +30,16 @@
 
 <script>
 export default {
-    data() {
-        return {
-            list: [
-                {name: 'Home'},
-                {name: 'Skills'},
-                {name: 'Projects'},
-                {name: 'About Me'},
-                {name: 'Contact'},
-            ]
-        }
-    },
+    props: ['lang'],
+    data: () => ({
+        list: [
+            {name: { uk: 'Home', pl: 'Strona Główna' }},
+            {name: { uk:'Skills', pl: 'Umiejętności' }},
+            {name: { uk:'Projects', pl: 'Projekty' }},
+            {name: { uk:'About Me', pl: 'O Mnie' }},
+            {name: { uk:'Contact', pl: 'Kontakt' }},
+        ]
+    }),
     mounted() {
         const elDOM = el => document.querySelector(el);
         const sites = [elDOM('.home-site'), elDOM('.skills-site'), elDOM('.projects-site'), elDOM('.about-site'), elDOM('.contact-site')];

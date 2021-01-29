@@ -1,28 +1,32 @@
 <template>
-  <div class="container">
-    <ParallaxBg />
-    <ToTop :isTopButtonActive="isTopButtonActive" />
-    <MainMenu ref="menu" />
-    <HomeSite ref="home" />
-    <SkillsPage ref="skills" />
-    <ProjectsPage ref="projects" />
-    <About ref="about" />
-    <Contact ref="contact" />
-    <Footer ref="footer" :isTopButtonActive="isTopButtonActive" />
-  </div>
+    <div class="container">
+        <ParallaxBg />
+        <ToTop :isTopButtonActive="isTopButtonActive" />
+        <MainMenu ref="menu" :lang="lang" @change-lang="changeLang" />
+        <HomeSite ref="home" :lang="lang" />
+        <SkillsPage ref="skills" :lang="lang" />
+        <ProjectsPage ref="projects" :lang="lang" />
+        <About ref="about" :lang="lang" />
+        <Contact ref="contact" :lang="lang" />
+        <Footer ref="footer" :isTopButtonActive="isTopButtonActive" :lang="lang" />
+    </div>
 </template>
 
 <script>
 export default {
     data() {
-      return {
-          isTopButtonActive: false
-      }
+        return {
+            isTopButtonActive: false,
+            isLoading: true,
+            lang: ''
+        }
+    },
+    created() {
+        this.changeLang();
     },
     mounted() {
         const el = e => document.querySelector(e);
         const elList = e => document.querySelectorAll(e);
-
         window.addEventListener('scroll', () => {
             this.isTopButtonActive = this.toggleTopButton();
             const addClassEl = [el('.skills-site .header h2'), el('.projects-site .header h2'), el('.aboutme-site .header h2'), el('.experience .header h2'), el('.experience .list-one-title h3'), el('.experience .list-two-title h3'), el('.hobby .info div p'), el('.contact-site .header h2'), el('.contact-site .info p'), el('.contact-site form button')];
@@ -47,6 +51,27 @@ export default {
         });
     },
   methods: {
+      changeLang(lang) {
+          if(this.$cookies.get('lang')) {
+              if(lang) {
+                  this.$cookies.set('lang', lang, {
+                      path: '/',
+                      maxAge: 60
+                  })
+              } else {
+                this.$cookies.set('lang', this.$cookies.get('lang'), {
+                  path: '/',
+                  maxAge: 60
+                })
+              }
+          } else {
+              this.$cookies.set('lang', 'uk', {
+                  path: '/',
+                  maxAge: 60
+              })
+          }
+          this.lang = this.$cookies.get('lang');
+      },
       toggleTopButton() {
           const homeBottom = this.$refs.home.$el.getBoundingClientRect().bottom;
           const footerBottom = this.$refs.footer.$el.getBoundingClientRect().bottom;
@@ -67,34 +92,34 @@ export default {
           return element.getBoundingClientRect().bottom <= window.innerHeight;
       },
       setActiveLink() {
-        const el = e => document.querySelector(e);
-        const ref = e => this.$refs[e];
-        if(el('.overlay-menu-list')) {
-          const sites = [ref('home'), ref('skills'), ref('projects'), ref('about'), ref('contact')];
-          sites.forEach((ref, index) => {
-            const rect = ref.$el.getBoundingClientRect();
-            const link = el(`.overlay-menu-list li:nth-of-type(${index + 1})`);
-            const menuHeight = this.$refs.menu.$el.getBoundingClientRect().height;
-            if(rect.top <= menuHeight && rect.bottom >= menuHeight) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-          });
-        }
+          const el = e => document.querySelector(e);
+          const ref = e => this.$refs[e];
+          if(el('.overlay-menu-list')) {
+              const sites = [ref('home'), ref('skills'), ref('projects'), ref('about'), ref('contact')];
+              sites.forEach((ref, index) => {
+                  const rect = ref.$el.getBoundingClientRect();
+                  const link = el(`.overlay-menu-list li:nth-of-type(${index + 1})`);
+                  const menuHeight = this.$refs.menu.$el.getBoundingClientRect().height;
+                  if(rect.top <= menuHeight && rect.bottom >= menuHeight) {
+                      link.classList.add('active');
+                  } else {
+                      link.classList.remove('active');
+                  }
+              });
+          }
       }
   },
   head() {
-    return {
-      title: 'Portfolio',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'This is my portfolio created with nuxt in 2021.'
-        }
-      ]
-    }
+      return {
+          title: 'Portfolio',
+          meta: [
+              {
+                  hid: 'description',
+                  name: 'description',
+                  content: 'This is my portfolio created with nuxt in 2021.'
+              }
+          ]
+      }
   }
 }
 </script>

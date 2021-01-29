@@ -34,6 +34,7 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    'cookie-universal-nuxt',
     '@nuxtjs/axios'
   ],
   axios: {
@@ -45,5 +46,14 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-  }
+  },
+
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => {
+        return ['script', 'style', 'font', 'image'].includes(type)
+      }
+    }
+  },
+  loadingIndicator: '~/layouts/loader.html'
 }

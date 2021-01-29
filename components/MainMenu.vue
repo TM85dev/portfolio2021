@@ -2,44 +2,59 @@
     <nav>
         <div class="logo"></div>
         <div class="icons">
-            <div class="mail" @click="contactHandler"></div>
-            <div class="linkedin"></div>
-            <div class="github"></div>
+            <div 
+                v-for="(icon, index) in icons" 
+                :key="index" 
+                :style="`background-image: url(${icon.path})`"
+                @click="clickIconHandler(icon)"
+            ></div>
         </div>
         <div :class="isLangOpen ? 'lang active' : 'lang'">
             <div class="selected" @click="clickLangHandler">
-                <div ref="currentLang" class="icon"></div>
+                <div ref="currentLang" :class="lang==='uk' ? 'icon uk' : 'icon pl'"></div>
                 <div class="arrow"></div>
             </div>
-            <div ref="otherLang" class="choose"></div>
+            <div ref="otherLang" :class="lang==='uk' ? 'choose pl' : 'choose uk' " @click="changeCurrentLang"></div>
         </div>
         <div class="mobile-menu" @click="activeMobileMenu">
             <div></div>
             <div></div>
             <div></div>
         </div>
-        <OverlayMenu v-if="isMobileActive" @close-mobile-menu="closeMobileMenu" />
+        <OverlayMenu 
+            v-if="isMobileActive" 
+            :lang="lang"
+            @close-mobile-menu="closeMobileMenu" 
+        />
     </nav>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            isLangOpen: false,
-            isMobileActive: false
-        }
-    },
+    props: [
+        'lang'
+    ],
+    data: () => ({
+        icons: [
+            {name: 'mail', path: require('~/assets/img/mail.svg')},
+            {name: 'linkedin', path: require('~/assets/img/linkedin.svg'), link: 'linkedin.com/in/tmdev85'},
+            {name: 'github', path: require('~/assets/img/github.svg'), link: 'github.com/TM85dev'},
+        ],
+        isLangOpen: false,
+        isMobileActive: false
+    }),
     mounted() {
-        this.$refs.currentLang.classList.add('pl');
-        this.$refs.otherLang.classList.add('uk');
     },
     methods: {
-        contactHandler() {
-            const el = e => document.querySelector(e);
-            const contact = el('.contact-site').getBoundingClientRect(); 
-            el('.contact-site').scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => el('.contact-site form label:first-of-type input').focus(), contact.top > 500 ? 1000 : 400);
+        clickIconHandler(icon) {
+            if(icon.name === 'mail') {
+                const el = e => document.querySelector(e);
+                const contact = el('.contact-site').getBoundingClientRect(); 
+                el('.contact-site').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => el('.contact-site form label:first-of-type input').focus(), contact.top > 500 ? 1000 : 400);
+            } else {
+                window.open(`https://${icon.link}`, '_blank');
+            }
         },
         activeMobileMenu() {
             this.isMobileActive = true;
@@ -49,6 +64,21 @@ export default {
         },
         clickLangHandler() {
             this.isLangOpen = !this.isLangOpen;
+        },
+        changeCurrentLang(e) {
+            let lang = '';
+            const currentLang = e.target.classList[1];
+            if(currentLang === 'uk') {
+                lang = 'uk';
+                this.$refs.currentLang.classList = 'icon uk';
+                this.$refs.otherLang.classList = 'choose pl';
+            } else {
+                lang = 'pl';
+                this.$refs.currentLang.classList = 'icon pl';
+                this.$refs.otherLang.classList = 'choose uk';
+            }
+            this.$emit('change-lang', lang);
+            this.clickLangHandler();
         }
     }
 }

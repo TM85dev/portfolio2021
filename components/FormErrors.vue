@@ -1,15 +1,16 @@
 <template>
     <div ref="errors" class="errors">
         <div class="close" @click="closeErrors"></div>
-        <p v-if="errors.name">* {{ errors.name }}</p>
-        <p v-if="errors.email">* {{ errors.email }}</p>
-        <p v-if="errors.message">* {{ errors.message }}</p>
+        <p v-if="errors.name[lang]">* {{ errors.name[lang] }}</p>
+        <p v-if="errors.email[lang]">* {{ errors.email[lang] }}</p>
+        <p v-if="errors.message[lang]">* {{ errors.message[lang] }}</p>
     </div>
 </template>
 
 <script>
 export default {
     props: [
+        'lang',
         'inputs',
         'errors'
     ],

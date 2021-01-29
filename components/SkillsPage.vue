@@ -2,7 +2,7 @@
     <div class="skills-site">
         <div class="shadow"></div>
         <div class="header">
-            <h2>My Skills</h2>
+            <h2>{{ lang==='uk' ? title.uk : title.pl }}</h2>
         </div>
         <div class="skills-menu">
             <div :ref="select.ref" :class="select.isActive ? 'select active' : 'select'" 
@@ -10,7 +10,9 @@
                 @mouseenter.self="selectHoverHandler(select)" 
                 @mouseleave.self="selectLeaveHandler(select)"
             >
-                <div @click.self="selectClickHandler(select)">{{ select.name }}</div>
+                <div @click.self="selectClickHandler(select)">
+                    {{ lang==='pl' && select.id===3 ? 'Inne' : select.name }}
+                </div>
                 <div></div>
             </div>
         </div>
@@ -27,7 +29,7 @@
                 </div>
                 <p>
                     <span>{{ skillInfo.title }}</span>
-                    <span>{{ skillInfo.descriptionUK }}</span>
+                    <span>{{ lang==='uk' ? skillInfo.descriptionUK : skillInfo.descriptionPL }}</span>
                 </p>
             </template>
         </div>
@@ -36,26 +38,26 @@
 
 <script>
 export default {
-    data() {
-        return {
-            isLoading: false,
-            skillInfo: {name: 'html'},
-            skillsMenu: [
-                {id: 1, name: 'Front-End', isActive: true, ref: 'frontend'},
-                {id: 2, name: 'Back-End', isActive: false, ref: 'backend'},
-                {id: 3, name: 'Other', isActive: false, ref: 'other'},
-            ],
-            frontEndSkills: [
-                'html', 'css', 'scss', 'animejs', 'bootstrap', 'js', 'jquery', 'react', 'nextjs', 'vue', 'nuxtjs'
-            ],
-            backEndSkills: [
-                'php', 'laravel', 'nodejs', 'express', 'mariadb', 'mongodb'
-            ],
-            otherSkills: [
-                'git', 'github', 'linux', 'npm', 'axios', 'wordpress', 'responsive', 'mobile_first', 'rest_api'
-            ]
-        }
-    },
+    props: ['lang'],
+    data: () => ({
+        title: {uk: 'My Skills', pl: 'Moje Umiejętności'},
+        isLoading: false,
+        skillInfo: {name: 'html'},
+        skillsMenu: [
+            {id: 1, name: 'Front-End', isActive: true, ref: 'frontend'},
+            {id: 2, name: 'Back-End', isActive: false, ref: 'backend'},
+            {id: 3, name: 'Other', isActive: false, ref: 'other'},
+        ],
+        frontEndSkills: [
+            'html', 'css', 'scss', 'animejs', 'bootstrap', 'js', 'jquery', 'react', 'nextjs', 'vue', 'nuxtjs'
+        ],
+        backEndSkills: [
+            'php', 'laravel', 'nodejs', 'express', 'mariadb', 'mongodb'
+        ],
+        otherSkills: [
+            'git', 'github', 'linux', 'npm', 'axios', 'wordpress', 'responsive', 'mobile_first', 'rest_api'
+        ]
+    }),
     methods: {
         currentSkillsIcons(name) {
             return name==='Front-End' ? this.frontEndSkills : (name==='Back-End' ? this.backEndSkills : this.otherSkills);
