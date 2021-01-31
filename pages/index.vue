@@ -50,77 +50,77 @@ export default {
             this.setActiveLink();
         });
     },
-  methods: {
-      changeLang(lang) {
-          if(this.$cookies.get('lang')) {
-              if(lang) {
-                  this.$cookies.set('lang', lang, {
-                      path: '/',
-                      maxAge: 60
-                  })
-              } else {
-                this.$cookies.set('lang', this.$cookies.get('lang'), {
-                  path: '/',
-                  maxAge: 60
+    methods: {
+        changeLang(lang) {
+            if(this.$cookies.get('lang')) {
+                if(lang) {
+                    this.$cookies.set('lang', lang, {
+                        path: '/',
+                        maxAge: 60
+                    })
+                } else {
+                    this.$cookies.set('lang', this.$cookies.get('lang'), {
+                    path: '/',
+                    maxAge: 60
+                    })
+                }
+            } else {
+                this.$cookies.set('lang', 'uk', {
+                    path: '/',
+                    maxAge: 60
                 })
-              }
-          } else {
-              this.$cookies.set('lang', 'uk', {
-                  path: '/',
-                  maxAge: 60
-              })
-          }
-          this.lang = this.$cookies.get('lang');
-      },
-      toggleTopButton() {
-          const homeBottom = this.$refs.home.$el.getBoundingClientRect().bottom;
-          const footerBottom = this.$refs.footer.$el.getBoundingClientRect().bottom;
-          return (homeBottom <= (window.innerHeight / 2)) && (footerBottom > (window.innerHeight + 50)) ? 
-              true : false
-      },
-      showScaleOpacityAnim(element) {
-          element.children.forEach((item, index) => {
-              this.$anime({
-                  targets: item,
-                  opacity: 1,
-                  easing: 'easeOutExpo',
-                  delay: index * 100
-              })
-          })
-      },
-      scrollCondition(element) {
-          return element.getBoundingClientRect().bottom <= window.innerHeight;
-      },
-      setActiveLink() {
-          const el = e => document.querySelector(e);
-          const ref = e => this.$refs[e];
-          if(el('.overlay-menu-list')) {
-              const sites = [ref('home'), ref('skills'), ref('projects'), ref('about'), ref('contact')];
-              sites.forEach((ref, index) => {
-                  const rect = ref.$el.getBoundingClientRect();
-                  const link = el(`.overlay-menu-list li:nth-of-type(${index + 1})`);
-                  const menuHeight = this.$refs.menu.$el.getBoundingClientRect().height;
-                  if(rect.top <= menuHeight && rect.bottom >= menuHeight) {
-                      link.classList.add('active');
-                  } else {
-                      link.classList.remove('active');
-                  }
-              });
-          }
-      }
-  },
-  head() {
-      return {
-          title: 'Portfolio',
-          meta: [
-              {
-                  hid: 'description',
-                  name: 'description',
-                  content: 'This is my portfolio created with nuxt in 2021.'
-              }
-          ]
-      }
-  }
+            }
+            this.lang = this.$cookies.get('lang');
+        },
+        toggleTopButton() {
+            const homeBottom = this.$refs.home.$el.getBoundingClientRect().bottom;
+            const footerBottom = this.$refs.footer.$el.getBoundingClientRect().bottom;
+            return (homeBottom <= (window.innerHeight / 2)) && (footerBottom > (window.innerHeight + 50)) ? 
+                true : false
+        },
+        showScaleOpacityAnim(element) {
+            element.children.forEach((item, index) => {
+                this.$anime({
+                    targets: item,
+                    opacity: 1,
+                    easing: 'easeOutExpo',
+                    delay: index * 100,
+                })
+            })
+        },
+        scrollCondition(element) {
+            return element.getBoundingClientRect().bottom <= window.innerHeight;
+        },
+        setActiveLink() {
+            const el = e => document.querySelector(e);
+            const ref = e => this.$refs[e];
+            if(el('.overlay-menu-list')) {
+                const sites = [ref('home'), ref('skills'), ref('projects'), ref('about'), ref('contact')];
+                sites.forEach((ref, index) => {
+                    const rect = ref.$el.getBoundingClientRect();
+                    const link = el(`.overlay-menu-list li:nth-of-type(${index + 1})`);
+                    const menuHeight = this.$refs.menu.$el.getBoundingClientRect().height;
+                    if(rect.top <= menuHeight && rect.bottom >= menuHeight) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        }
+    },
+    head() {
+        return {
+            title: 'Portfolio',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'This is my portfolio created with nuxt in 2021.'
+                }
+            ]
+        }
+    }
 }
 </script>
 

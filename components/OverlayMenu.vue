@@ -1,5 +1,5 @@
 <template>
-    <div ref="bg" class="bg-overlay-menu">
+    <div ref="bg" class="bg-overlay-menu" @click.self="closeMobileMenu">
         <div ref="overlayMenu" class="overlay-menu">
             <div ref="close" class="close" @click="closeMobileMenu">
                 <svg viewBox="0 0 200 200">
