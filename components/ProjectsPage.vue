@@ -4,7 +4,9 @@
         <div class="header">
             <h2>{{ title[lang] }}</h2>
         </div>
-        <Project v-for="(project, index) in projects" :key="index" :project="project" />
+        <div class="projects-list">
+            <Project v-for="(project, index) in projects" :key="index" :project="project" />
+        </div>
     </div>
 </template>
 

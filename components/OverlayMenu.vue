@@ -17,8 +17,8 @@
             <div ref="logo" class="logo"></div>
             <ul ref="list" class="overlay-menu-list">
                 <li v-for="(link, index) in list" :key="index">
-                    <a :href="`/${link.name}`" 
-                        @click.prevent="scrollHandler(link.name.uk)">
+                    <a :href="`/${link.name[lang]}`" 
+                        @click.prevent="clickToScrollOverlay(link.name.uk)">
                             {{ link.name[lang] }}
                     </a>
                     <div></div>
@@ -30,29 +30,14 @@
 
 <script>
 export default {
-    props: ['lang'],
-    data: () => ({
-        list: [
-            {name: { uk: 'Home', pl: 'Strona Główna' }},
-            {name: { uk:'Skills', pl: 'Umiejętności' }},
-            {name: { uk:'Projects', pl: 'Projekty' }},
-            {name: { uk:'About Me', pl: 'O Mnie' }},
-            {name: { uk:'Contact', pl: 'Kontakt' }},
-        ]
-    }),
+    props: [
+        'lang',
+        'list',
+        'currentLinkActive',
+        'clickToScroll'
+    ],
     mounted() {
-        const elDOM = el => document.querySelector(el);
-        const sites = [elDOM('.home-site'), elDOM('.skills-site'), elDOM('.projects-site'), elDOM('.about-site'), elDOM('.contact-site')];
-        sites.forEach((ref, index) => {
-            const rect = ref.getBoundingClientRect();
-            const link = document.querySelector(`.overlay-menu-list li:nth-of-type(${index + 1})`);
-            const menuHeight = elDOM('nav').getBoundingClientRect().height;
-            if(rect.top <= menuHeight && rect.bottom >= menuHeight) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
+        this.currentLinkActive('.overlay-menu-list li');
         this.$anime.timeline({
             targets: this.$refs.overlayMenu,
             width: ['0%', '100%'],
@@ -80,6 +65,10 @@ export default {
         })
     },
     methods: {
+        clickToScrollOverlay(name) {
+            this.closeMobileMenu();
+            this.clickToScroll(name);
+        },
         closeMobileMenu() {
             this.$anime({
                 targets: this.$refs.list.children,
@@ -104,16 +93,6 @@ export default {
                 }
             })
         },
-        scrollHandler(name) {
-            const el = name.replace(' ', '').toLowerCase();
-            document.querySelector(`.${el}-site`).scrollIntoView({behavior: 'smooth'});
-            this.closeMobileMenu();
-            if(name.toLowerCase()==='contact') {
-                const elDOM = e => document.querySelector(e);
-                const contact = elDOM('.contact-site').getBoundingClientRect(); 
-                setTimeout(() => elDOM('.contact-site form label:first-of-type input').focus(), contact.top > 500 ? 1000 : 400);
-            }
-        }
     }
 }
 </script>

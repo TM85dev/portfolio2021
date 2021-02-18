@@ -280,6 +280,9 @@ nav {
         }
     }
 }
+.desktop-menu {
+    display: none;
+}
 
 // HOME
 .home-site {
@@ -290,8 +293,12 @@ nav {
     height: 100%;
     #logo {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        // top: 50%;
+        // left: 50%;
         .logo {
             background-image: url('../img/logo.png');
             background-size: contain;
@@ -544,6 +551,10 @@ nav {
                 transform: translateY(0px);
             }
         }
+    }
+    .projects-list {
+        display: flex;
+        flex-wrap: wrap;
     }
     .project {
         display: flex;
@@ -832,6 +843,7 @@ nav {
 // CONTACT
 .contact-site {
     background-image: url(../img/bg.jpg);
+    background-size: cover;
     // position: relative;
     // min-height: 100%;
     padding-bottom: 20px;
@@ -1410,10 +1422,277 @@ footer {
 }
 }
 @media screen and(min-width: 768px) {
-
+    nav .lang {
+        margin: 0 16px 0 2px;
+    }
+    .home-site {
+        #logo .logo {
+            width: 200px;
+            height: 162px;
+        }
+        #logo .greetings h1 {
+            font-size: 2.9em;
+        }
+        #logo .greetings p {
+            font-size: 1.3em;
+        }
+        .scroll-down p {
+            font-size: 0.9em;
+        }
+    }
+    .projects-site .project {
+        margin: 26px auto 46px;
+    }
+    .experience {
+        padding: 0 36px 46px;
+        .shadow {
+            left: -26px;
+            width: 100vw;
+        }
+        ul {
+            margin: 16px 0 26px 0;
+            li {
+                padding: 18px 36px 18px 76px;
+                &::before {
+                    padding: 14px 24px;
+                }
+                &.active:hover {
+                    padding: 18px 30px 18px 82px;
+                    &::before {
+                        padding: 14px 27px;
+                    }
+                }
+            }
+        }
+    }
+    .hobby .info div:first-of-type p {
+        font-size: 1.3em;
+        line-height: 1.9em;
+    }
+    .contact-site .header,
+    .contact-site .info {
+        margin-left: 40px;
+    }
+    footer  {
+        .title {
+            padding: 40px 0 30px;
+            div {
+                width: 60px;
+                height: 46px;
+            }
+            p {
+                font-size: 2.48em;
+            }
+        }
+        .icons div {
+            width: 24px;
+            height: 24px;
+        }
+        .copyright {
+            padding-top: 1.1em;
+        }
+    }
 }
 @media screen and(min-width: 1024px) {
-
+    nav {
+        height: 80px;
+        .logo {
+            width: 70px;
+            height: 56px;
+            margin: 0 30px;
+        }
+        .icons div {
+            width: 26px;
+            height: 26px;
+        }
+        .lang {
+            margin: 0 30px 0 2px;
+            .selected .icon,
+            .choose {
+                width: 34px;
+                height: 34px;
+            }
+            .selected .arrow {
+                margin: 8px 0 0 4px;
+            }
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .desktop-menu {
+            display: flex;
+            &>div {
+                margin: 0 16px;
+                a {
+                    color: lightgray;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 1.26em;
+                    transition: color 0.2s ease-out;
+                }
+                div {
+                    width: 10px;
+                    height: 2px;
+                    background-color: lightgray;
+                    transition: background-color, width 0.4s ease-out;
+                }
+                &:hover,
+                &.active {
+                    a {
+                        color: #ED4850;
+                    }
+                    div {
+                        background-color: #ED4850;
+                        width:100%;
+                    }
+                }
+            }
+        }
+    }
+    .home-site {
+        #logo .logo {
+            width: 260px;
+            height: 222px;
+        }
+        .greetings {
+            h1 {
+                font-size: 4.2em;
+            }
+            p {
+                font-size: 2em;
+            }
+        }
+        .scroll-down p {
+            font-size: 1.1em;
+        }
+    }
+    .skills-site {
+        .header,
+        .skills-menu {
+            margin-left: 50px;
+        }
+        .header h2 {
+            font-size: 3.6em;
+        }
+        .skills-menu .select div:first-of-type {
+            font-size: 1.6em;
+        }
+        .skills-icons {
+            max-width: 80%;
+            flex-wrap: wrap;
+            margin: 10px auto;
+            justify-content: space-evenly;
+            .skill {
+                min-width: 44px;
+                min-height: 44px;
+                margin: 20px 26px;
+                padding: 18px 18px 16px;
+            }
+        }
+        .skill-info .icon {
+            height: 52px;
+            padding: 22px 22px 18px;
+        }
+        .skill-info p {
+            font-size: 1.1em;
+            margin: 30px 80px;
+        }
+    }
+    .projects-site {
+        .header h2 {
+            font-size: 3.6em;
+        }
+        .projects-list {
+           padding: 0 50px;
+       }
+    }
+    .aboutme-site {
+        .header,
+        .info-learning div:first-of-type {
+            margin-left: 50px;
+            font-size: 1.2em;
+        }
+        .header h2 {
+            font-size: 3.6em;
+        }
+    }
+    .experience {
+        .header h2 {
+            font-size: 3.6em;
+        }
+        .list-one-title h3 {
+            font-size: 1.6em;
+            max-width: 633px;
+        }
+        .list-two-title h3 {
+            font-size: 1.6em;
+            max-width: 452px;
+        }
+        ul {
+            font-size: 1.2em;
+            li {
+                min-height: 60px;
+            }
+        }
+    }
+    .hobby .info {
+        div:first-of-type {
+            height: 100%;
+            p {
+                font-size: 1.6em;
+            }
+        }
+        div:last-of-type {
+            height: 380px;
+        }
+    }
+    .contact-site {
+        padding-bottom: 50px;
+        .header h2 {
+            margin-left: 50px;
+            font-size: 3.6em;
+        }
+        .info p {
+            margin-left: 70px;
+            font-size: 1.4em;
+        }
+        form {
+            max-width: 640px;
+            label input {
+                padding: 20px;
+                font-size: 1.2em;
+                margin: 30px auto;
+            }
+            label textarea {
+                padding: 20px;
+                font-size: 1.5em;
+                margin: 30px auto;
+            }
+            button {
+                font-size: 1.2em;
+            }
+        }
+    }
+    footer  {
+        .title {
+            padding: 50px 0 40px;
+            div {
+                width: 70px;
+                height: 56px;
+            }
+            p {
+                font-size: 2.9em;
+            }
+        }
+        .icons div {
+            width: 28px;
+            height: 28px;
+        }
+        .copyright {
+            padding-top: 1.1em;
+            font-size: 1.2em;
+        }
+    }
 }
 @media screen and(min-width: 1366px) {
 
