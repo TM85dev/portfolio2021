@@ -1774,5 +1774,104 @@ footer {
     }
 }
 @media screen and(min-width: 1920px) {
-
+    nav {
+        height: 100px;
+    }
+    .home-site {
+        #logo {
+            .logo {
+                width: 360px;
+                height: 280px;
+            }
+            .greetings h1 {
+                font-size: 5.2em;
+            }
+            .greetings p {
+                font-size: 2.4em;
+            }
+        }
+        .scroll-down {
+            p {
+                font-size: 1.4em;
+                margin: 8px 0;
+                padding: 0 26px;
+            }
+            div {
+                height: 2px;
+            }
+        }
+    }
+    .skills-site {
+        .header {
+            padding-top: 80px;
+            margin-left: 100px;
+        }
+        .skills-menu {
+            margin-left: 100px;
+        }
+        .skills-icons {
+            max-width: 70%;
+            .skill {
+                margin: 31px 57px;
+            }
+        }
+        .skill-info {
+            margin-top: 100px;
+            p {
+                margin: 30px 400px;
+            }
+        }
+    }
+    .projects-site {
+        padding-bottom: 80px;
+        .header {
+            padding: 100px 16px 6px;
+        }
+    }
+    .aboutme-site {
+        .header {
+            margin-left: 100px;
+        }
+        .info-learning div:first-of-type {
+            margin-left: 100px;
+            padding-right: 150px;
+        }
+        .info-learning div:last-of-type {
+            margin-top: -140px;
+            height: 440px;
+            background-position: center;
+            width: 55%;
+        }
+    }
+    .experience {
+        padding: 0 100px 80px;
+        .shadow {
+            left: -100px;
+        }
+        .header {
+            padding: 100px 16px 10px;
+        }
+    }
+    .hobby .info {
+        div:first-of-type p {
+            max-width: 50%;
+            line-height: 2.6em;
+        }
+        div:last-of-type {
+            height: 460px;
+        }
+    }
+    .contact-site {
+        padding-bottom: 100px;
+        .header {
+            margin-left: 100px;
+            padding: 100px 16px 10px;
+        }
+        .info {
+            margin-left: 100px;
+        }
+        form {
+            max-width: 1400px;
+        }
+    }
 }
