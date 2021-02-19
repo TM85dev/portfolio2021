@@ -1672,6 +1672,19 @@ footer {
                 font-size: 1.2em;
             }
         }
+        .errors {
+            max-width: 600px;
+            padding: 30px;
+            .close {
+                right: 16px;
+                top: 10px;
+                width: 16px;
+                height: 16px;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        }
     }
     footer  {
         .title {
@@ -1693,9 +1706,72 @@ footer {
             font-size: 1.2em;
         }
     }
+    .to-top {
+        bottom: 36px;
+        right: 42px;
+        width: 36px;
+        height: 36px;
+        border-radius: 40px;
+    }
 }
 @media screen and(min-width: 1366px) {
-
+    nav {
+        height: 90px;
+    }
+    .home-site #logo {
+        .logo {
+            width: 280px;
+            height: 242px;
+        }
+        .greetings h1 {
+            font-size: 4.2em;
+        }
+        .greetings p {
+            font-size: 2em;
+        }
+    }
+    .skills-site {
+        .skills-icons .skill {
+            margin: 20px 40px;
+        }
+        .skill-info  {
+            min-height: 400px;
+            p {
+                margin: 30px 200px;
+            }
+        }
+    }
+    .projects-site {
+        .project {
+            max-width: 470px;
+            height: 300px;
+            .info h3 {
+                font-size: 2.6em;
+            }
+            .info div a {
+                font-size: 1.3em;
+                padding: 10px 16px;
+            }
+        }
+    }
+    .experience ul {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            width: 40%;
+        }
+    }
+    .hobby {
+        .info {
+            align-items: center;
+            div:first-of-type p {
+                line-height: 2.2em;
+            }
+        }
+    }
+    .contact-site form {
+        max-width: 900px;
+    }
 }
 @media screen and(min-width: 1920px) {
 
