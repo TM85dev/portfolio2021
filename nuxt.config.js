@@ -1,9 +1,12 @@
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
-  target: 'static',
+  target: 'server',
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'Portfolio-vue-2021',
     meta: [
       { charset: 'utf-8' },

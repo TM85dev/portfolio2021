@@ -60,12 +60,12 @@ export default {
         changeLang(lang) {
             if(this.$cookies.get('lang')) {
                 if(lang) {
-                    this.$cookies.set('lang', lang, { path: '/', maxAge: 60 })
+                    this.$cookies.set('lang', lang, { path: '/', maxAge: 60*60*24*7 })
                 } else {
-                    this.$cookies.set('lang', this.$cookies.get('lang'), { path: '/', maxAge: 60 })
+                    this.$cookies.set('lang', this.$cookies.get('lang'), { path: '/', maxAge: 60*60*24*7 })
                 }
             } else {
-                this.$cookies.set('lang', 'uk', { path: '/', maxAge: 60 })
+                this.$cookies.set('lang', 'uk', { path: '/', maxAge: 60*60*24*7 })
             }
             this.lang = this.$cookies.get('lang');
         },
@@ -77,12 +77,13 @@ export default {
         },
         showScaleOpacityAnim(element) {
             element.children.forEach((item, index) => {
-                this.$anime({
-                    targets: item,
-                    opacity: 1,
-                    easing: 'easeOutExpo',
-                    delay: index * 100,
-                })
+                setTimeout(() => item.classList.add('visible'), (200 * index))
+                // this.$anime({
+                //     targets: item,
+                //     opacity: 1,
+                //     easing: 'easeOutExpo',
+                //     delay: index * 100,
+                // })
             })
         },
         scrollCondition(element) {

@@ -7,8 +7,8 @@
         <div class="info">
             <p>{{ info[lang] }}</p>
         </div>
-        <form @submit.prevent="sendMessageHandler">
-            <label>
+        <form @submit.prevent="sendMessageHandler" :class="isMessageSend ? 'send' : ''">
+            <label> name
                 <input 
                     type="text" 
                     v-model="inputs.name" 
@@ -17,7 +17,7 @@
                     @change="nameValidator"
                 >
             </label>
-            <label>
+            <label> email
                 <input 
                     type="email" 
                     v-model="inputs.email" 
@@ -26,7 +26,7 @@
                     @change="emailValidator"
                 >
             </label>
-            <label>
+            <label> message
                 <textarea 
                     v-model="inputs.message" 
                     cols="30" 
@@ -38,6 +38,9 @@
                 </textarea>
             </label>
             <button>{{ btnText[lang] }}</button>
+            <div class="message-send" v-if="isMessageSend">
+                {{ isMessageSending ? waiting[lang] : messageSend[lang] }}
+            </div>
         </form>
         <FormErrors 
             v-if="errors.name[lang] || errors.email[lang] || errors.message[lang]" 
@@ -63,9 +66,13 @@ export default {
             pl: { name: 'nazwa', email: 'e-mail', message: 'wiadomość' }
         },
         btnText: { uk: 'SEND MESSAGE', pl: 'WYŚLIJ WIADOMOŚĆ' },
+        waiting: {uk: 'SENDING...', pl: 'TRWA WYSYŁANIE...'},
+        messageSend: {uk: 'MESSAGE SEND', pl: 'WIADOMOŚĆ WYSŁANA'},
         inputs: { name: '', email: '', message: '' },
         errors: {},
-        isValid: { name: null, email: null, message: null }
+        isValid: { name: null, email: null, message: null },
+        isMessageSending: false,
+        isMessageSend: false,
     }),
     created() {
         this.errors = this.setErrors();
@@ -121,7 +128,14 @@ export default {
             this.emailValidator();
             this.textValidator();
             if(this.isValid.name && this.isValid.email && this.isValid.message) {
-                alert('message send')
+                this.isMessageSending = true;
+                this.isMessageSend = true;
+                this.$axios.$post('/api/mail/', {
+                    ...this.inputs
+                }).then(res => {
+                    this.isMessageSending = false
+                    console.log(res);
+                })
             }
         }
     }

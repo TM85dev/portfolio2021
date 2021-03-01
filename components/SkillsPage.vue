@@ -5,7 +5,7 @@
             <h2>{{ lang==='uk' ? title.uk : title.pl }}</h2>
         </div>
         <div class="skills-menu">
-            <div :ref="select.ref" :class="select.isActive ? 'select active' : 'select'" 
+            <div :ref="select.ref" :class="select.isActive ? 'select visible active' : 'select visible'" 
                 v-for="select in skillsMenu" :key="select.id" 
                 @mouseenter.self="selectHoverHandler(select)" 
                 @mouseleave.self="selectLeaveHandler(select)"
@@ -25,7 +25,7 @@
             <img v-if="isLoading" src="../assets/img/loader.svg" alt="loader">
             <template v-else>
                 <div class="icon">
-                    <img :src="require(`../assets/img/icons/${skillInfo.name}.png`)" alt="skill info image" />
+                    <div :style="`background-image: url(${require(`../assets/img/icons/${skillInfo.name}.png`)})`"></div>
                 </div>
                 <p>
                     <span>{{ skillInfo.title }}</span>
@@ -107,6 +107,7 @@ export default {
             }
         },
         selectClickHandler(select) {
+            const list = e => document.querySelectorAll(e);
             this.skillsMenu = this.skillsMenu.map(item => ({
                 ...item,
                 isActive: item.id===select.id ? true : false
@@ -134,7 +135,7 @@ export default {
             }).finally(() => {
                 this.isLoading = false;
                 this.$anime({
-                    targets: document.querySelectorAll('.skills-site .skills-icons .skill'),
+                    targets: list('.skills-site .skills-icons .skill'),
                     opacity: [0, 1],
                     easing: 'easeOutExpo',
                     delay: this.$anime.stagger(100)
