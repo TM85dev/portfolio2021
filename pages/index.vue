@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <ParallaxBg />
+        <Cookies :lang="lang" />
         <ToTop :isTopButtonActive="isTopButtonActive" />
         <MainMenu ref="menu" :lang="lang" @change-lang="changeLang" />
         <HomeSite ref="home" :lang="lang" />

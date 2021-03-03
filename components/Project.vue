@@ -74,7 +74,7 @@ export default {
         closeGallery() {
             this.isGalleryActive = false;
             this.$refs.project.style.transform = '';
-        }
+        },
     },
 }
 </script>

@@ -1283,6 +1283,33 @@ footer {
         background-repeat: no-repeat;
     }
 }
+.cookies {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.76em;
+    box-shadow: 0 -2px 8px 0 black;
+    button {
+        outline: none;
+        cursor: pointer;
+        border-radius: 4px;
+        padding: 2px 17px;
+        font-size: 0.9em;
+        margin-left: 10vw;
+        border: 1px solid black;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: lightgray;
+        }
+    }
+}
 
 @media screen and(min-width: 360px) {
 nav {
@@ -1684,6 +1711,13 @@ footer {
         font-size: 1em;
     }
 }
+.cookies {
+    font-size: 0.86em;
+    height: 50px;
+    button {
+        padding: 3px 26px;
+    }
+}
 }
 @media screen and(min-width: 768px) {
     nav .lang {
@@ -1755,6 +1789,10 @@ footer {
         .copyright {
             padding-top: 1.1em;
         }
+    }
+    .cookies {
+        font-size: 1em;
+        height: 60px;       
     }
 }
 @media screen and(min-width: 1024px) {
@@ -2019,6 +2057,14 @@ footer {
         height: 36px;
         border-radius: 40px;
     }
+    .cookies {
+        font-size: 1.2em;
+        height: 66px;
+        button {
+            padding: 3px 30px;
+            margin-left: 8vw;
+        }
+    }
 }
 @media screen and(min-width: 1366px) {
     nav {
@@ -2064,6 +2110,9 @@ footer {
             }
             .info.show {
                 font-size: 2.3em;
+                .more>div:nth-of-type(2) div img {
+                    margin: 0 16px;
+                }
             }
             .info>div:last-of-type {
                 font-size: 1.5rem;

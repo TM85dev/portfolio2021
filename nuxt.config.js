@@ -41,11 +41,11 @@ export default {
     '@nuxtjs/axios'
   ],
   axios: {
-    proxy: true
+    proxy: true,
   },
-  proxy: {
-    '/api/': 'http://localhost:80/api/'
-  },
+  // proxy: {
+  //   '/api/': 'http://localhost:80/api/'
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
